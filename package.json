@@ -1,0 +1,60 @@
+{
+  "name": "dsh-plugin-jenkins-deploy",
+  "version": "0.1.0",
+  "description": "DSH 部署发布插件：通过 Jenkins 查看前后端项目并一键部署",
+  "author": "KrystalQAQ",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "lib/tool.js",
+    "cordis.patch.yml",
+    "package.json",
+    "locale/*.json",
+    "icon.svg"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "jenkins",
+    "deploy",
+    "deployment"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KrystalQAQ/dsh-plugin-jenkins-deploy.git"
+  },
+  "homepage": "https://github.com/KrystalQAQ/dsh-plugin-jenkins-deploy#readme",
+  "bugs": {
+    "url": "https://github.com/KrystalQAQ/dsh-plugin-jenkins-deploy/issues"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/dsh-tools": "0.2.1-rc.5"
+  },
+  "icon": "./icon.svg"
+}

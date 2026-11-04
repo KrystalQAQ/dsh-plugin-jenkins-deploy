@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Deploy",
+    "description": "Browse frontend/backend projects and deploy them through Jenkins, with agent tools for deployment."
+  }
+}

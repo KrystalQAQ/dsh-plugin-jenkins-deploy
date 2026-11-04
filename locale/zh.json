@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "部署发布",
+    "description": "通过 Jenkins 查看前后端项目并一键部署，同时向 agent 提供部署工具。"
+  }
+}

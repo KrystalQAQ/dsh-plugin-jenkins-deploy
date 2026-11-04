@@ -1,0 +1,7 @@
+# 部署发布插件（Jenkins）
+# Host 半边：在 webServer 上暴露 /x-jenkins-deploy/* 路由，代理 Jenkins API 并持久化凭据。
+# Client 半边：由本包 package.json 的 dsh.client 声明，client-modules 会自动挂载，
+#              注册左侧栏入口（sidebar.panellist）与主面板页面（main）。
+- insert:
+    - id: jenkins-deploy
+      name: 'dsh-plugin-jenkins-deploy'

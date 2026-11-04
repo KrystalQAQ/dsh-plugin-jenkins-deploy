@@ -1,0 +1,24 @@
+# 依赖
+node_modules/
+.pnpm-store/
+
+# 本地凭据（Jenkins 地址/账号/Token 等），绝不提交
+*.local
+.env
+.env.*
+!.env.example
+jenkins-deploy.json
+*.secret
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+*.swp
+
+# 构建/缓存
+dist/
+.turbo/
+coverage/
