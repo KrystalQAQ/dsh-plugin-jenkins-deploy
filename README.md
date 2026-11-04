@@ -28,18 +28,21 @@ DSH Web 客户端插件：在左侧栏新增「部署发布」入口，通过 Je
 
 ## 面向 agent 的工具
 
-插件在 Host 侧通过 `ctx.tools.register` 注册三个**全局工具**（对所有 agent 可见）。它们与 UI 页面共用同一套凭据与 Jenkins 调用逻辑，符合 DSH「一个操作、两种调用方」原则。
+插件在 Host 侧通过 `ctx.tools.register` 注册五个**全局工具**（对所有 agent 可见）。它们与 UI 页面共用同一套凭据与 Jenkins 调用逻辑，符合 DSH「一个操作、两种调用方」原则。
 
 | 工具 | 作用 | 关键参数 |
 |---|---|---|
+| `jenkins_deploy_get_config` | 查看当前 Jenkins 账号配置（地址/用户名/是否已配 Token，**不回显 Token**） | — |
+| `jenkins_deploy_set_config` | 配置 Jenkins 账号（地址/用户名/Token），保存后自动验证连通与权限 | `url`、`user`、`token?`(留空沿用) |
 | `jenkins_deploy_list` | 列出可部署项目（按环境/类型归类 + 最近构建状态） | `query?` 按 job 名过滤 |
 | `jenkins_deploy_status` | 查询某 job 的最近构建与历史，可附控制台日志 | `job`(必填)、`build?`、`with_console?` |
 | `jenkins_deploy_trigger` | 触发一次部署 | `job`(必填)、`branch?`(默认 dev)、`confirm_production?` |
 
 设计要点：
 
+- **账号管理**：`jenkins_deploy_get_config` / `jenkins_deploy_set_config` 让 agent 能像设置页一样查看并配置 Jenkins 账号；`set_config` 保存后会访问 Jenkins `/api/json` 验证凭据有效性与权限，Token 仅存服务端、不回显。
 - **生产安全**：`jenkins_deploy_trigger` 对 `prod` 环境，若未显式传 `confirm_production=true`，只返回 `{needs_confirmation:true}` 而**不真正触发**，促使模型先向用户二次确认。
-- **结构化返回**：成功 `{ok:true,...}`，失败 `{ok:false,code,message}`（如 `not_configured` / `jenkins_error` / `network_error`），不抛异常、不回显 Token。
+- **结构化返回**：成功 `{ok:true,...}`，失败 `{ok:false,code,message}`（如 `not_configured` / `invalid_args` / `jenkins_error` / `network_error`），不抛异常、不回显 Token。
 - **参数感知**：若 job 有 `build_branch` 参数则走 `buildWithParameters`，否则走 `build`。
 
 ## 架构
