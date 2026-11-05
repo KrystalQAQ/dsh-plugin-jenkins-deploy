@@ -92,9 +92,29 @@ dsh web --host <你的地址> --port 3080 --no-open
 
 保存后切回「项目」即可看到项目列表。
 
+## 兼容性
+
+| 项目 | 要求 |
+|---|---|
+| DSH 运行时 | `>=0.2.1-rc.3 <0.3.0-0`（`package.json` 的 `engines.dsh`，以 `dsh --version` 为准） |
+| `@deepseek-ai/dsh-tools` | 与运行时同版本，范围同上 |
+| `@deepseek-ai/cordis` | `~4.0.5` |
+
+`@deepseek-ai/dsh-tools` 在 `0.2.1-rc.3` 与 `0.2.1-rc.5` 之间代码完全一致（仅版本号不同），
+所以本插件对两个 rc 都按同一套 API 运行。若安装被拒，说明当前 DSH 版本落在声明范围之外，
+请升级 DSH 或为本插件放宽 `engines.dsh`，而不是用 `allow-version` 硬闯。
+
 ## 文件
 
 - `package.json` — 包声明（含 `dsh.bundle.patch` 与 `dsh.client`）
 - `cordis.patch.yml` — bundle 补丁
 - `lib/index.js` — Host 半边
 - `lib/client.js` — Client 半边
+- `lib/tool.js` — 面向 agent 的工具定义（`defineTool`）
+- `locale/{zh,en}.json` — 界面文案
+
+## 更新日志
+
+- **0.1.1** — 修复安装时被拒的兼容性声明：把 `@deepseek-ai/dsh-tools` 从精确锁 `0.2.1-rc.5`
+  放宽为范围，并新增 `engines.dsh: >=0.2.1-rc.3 <0.3.0-0`，以兼容 DSH `0.2.1-rc.3` → `0.2.2-rc.x`。
+- **0.1.0** — 首个版本。

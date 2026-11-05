@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-jenkins-deploy",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DSH 部署发布插件：通过 Jenkins 查看前后端项目并一键部署",
   "author": "KrystalQAQ",
   "license": "MIT",
@@ -52,9 +52,12 @@
       ]
     }
   },
+  "engines": {
+    "dsh": ">=0.2.1-rc.3 <0.3.0-0"
+  },
   "peerDependencies": {
     "@deepseek-ai/cordis": "~4.0.5",
-    "@deepseek-ai/dsh-tools": "0.2.1-rc.5"
+    "@deepseek-ai/dsh-tools": ">=0.2.1-rc.3 <0.3.0-0"
   },
   "icon": "./icon.svg"
 }
